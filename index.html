@@ -1,0 +1,43 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <a-scene>
+      <a-assets>
+        <img id="sky" src='universe.jpg'></img>
+      </a-assets>
+      
+      <a-camera look-controls id="camera">
+        <a-entity
+          id="cursor"
+          cursor="fuse: true; fuseTimeout: 500"
+          position="0 0 -1"
+          geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+          material="color: yellow; shader: flat"
+          animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 150; from: 0.1 0.1 0.1; to: 1 1 1"
+          animation__fusing="property: scale; startEvents: fusing; easing: easeInCubic; dur: 500; from: 1 1 1; to: 0.1 0.1 0.1"
+          animation__mouseleave="property: scale; startEvents: mouseleave; easing: easeInCubic; dur: 500; to: 1 1 1">
+        </a-entity>
+      </a-camera>
+      <a-camera>
+        <a-entity
+        id="mouse"
+        cursor="rayOrigin: mouse"
+        raycaster="objects: .clickable">
+        </a-entity>
+      </a-camera>
+
+      <a-entity id="people-text" text="value: People Data; width: 4; align: center" position="-3 2 -4.75" rotation="0 45 0"></a-entity>
+      <a-entity id="planets-text" text="value: Planets Data; width: 4; align: center" position="0 2 -6"></a-entity>
+      <a-entity id="starships-text" text="value: Starships Data; width: 4; align: center" position="3 2 -4.75" rotation="0 -45 0"></a-entity>
+
+      <a-sphere class="sphere" id="people-sphere" position="-5 0 -8" radius="1" color="#EF2D5E"></a-sphere>
+      <a-sphere class="clickable" id="planets-sphere" position="0 0 -9" radius="1" color="#EF2D5E"></a-sphere>
+      <a-sphere class="timed" id="starships-sphere" position="5 0 -8" radius="1" color="#EF2D5E" ></a-sphere>
+
+      <a-sky src='#sky'></a-sky>
+    </a-scene>
+  </body>
+</html>
