@@ -3,26 +3,32 @@ window.onload = () => {
 }
 
 function setup() {
-  const people_sphere = document.getElementById('people-sphere');
-  people_sphere.addEventListener("click", async function (e) {
+  const peopleSphere = document.getElementById('people-sphere');
+  peopleSphere.addEventListener("click", async function (e) {
     const data = await getRandomData('people');
     const formattedData = formatPeopleData(data);
     updateText(formattedData, 'people-text');
   });
 
-  const planet_sphere = document.getElementById('planets-sphere');
-  planet_sphere.addEventListener("mousedown", async function (e) {
+  const planetSphere = document.getElementById('planets-sphere');
+  planetSphere.addEventListener("mousedown", async function (e) {
     const data = await getRandomData('planets');
     const formattedData = formatPlanetsData(data);
     updateText(formattedData, 'planets-text');
-  })
+  });
 
-  const starships_sphere = document.getElementById('starships-sphere');
-  setInterval( async () => {
+  const starshipsSphere = document.getElementById('starships-sphere');
+  starshipsSphere.addEventListener("updateData", async function (e) {
     const data = await getRandomData('starships');
     const formattedData = formatStarshipsData(data);
     updateText(formattedData, 'starships-text');
-  }, 5000)
+  });
+
+  // Trigger the updateData event every 5 seconds
+  setInterval(() => {
+    const updateEvent = new CustomEvent('updateData');
+    starshipsSphere.dispatchEvent(updateEvent);
+  }, 5000);
 };
 
 async function getRandomData(category) {
